@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const title = "書道";
+      const imgUrl = "https://uta.pw/shodou/img/28/214.PNG";
+      const msg = (
+        <div>
+          <h1>{title}</h1>
+          <p>
+            <img src={imgUrl} />
+          </p>
+        </div>
+      );
+
+      // render()で描画
+      const elm = document.getElementById("root");
+      ReactDOM.render(msg, elm);
+    </script>
+  </body>
+</html>

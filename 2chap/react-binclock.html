@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+  </head>
+  <body style="text-align: center">
+    <div id="root"></div>
+    <script type="text/babel">
+      setInterval(update, 1000);
+
+      function update() {
+        const d = new Date();
+        const hour = z2(d.getHours());
+        const min = z2(d.getMinutes());
+        const sec = z2(d.getSeconds());
+        const binStr = hour + min + sec;
+        const style0 = { color: "blue", fontSize: "32px" };
+        const style1 = { color: "red", fontSize: "32px" };
+        const lines = [];
+
+        function z2(v) {
+          v = String("00" + v);
+          return v.substr(v.length - 2, 2);
+        }
+        console.log("sec" + sec);
+        console.log("binstr:" + binStr);
+        for (let i = 0; i < binStr.length; i++) {
+          const v = parseInt(binStr.substr(i, 1));
+          const bin = "000" + v.toString(2);
+          const bin8 = bin.substr(bin.length - 4, 4);
+
+          // console.log("v" + v);
+          // console.log("bin" + bin);
+
+          for (let j = 0; j < bin8.length; j++) {
+            if (bin8.substr(j, 1) === "0") {
+              lines.push(<span style={style0}>◯</span>);
+            } else {
+              lines.push(<span style={style1}>◯</span>);
+            }
+          }
+          lines.push(<br />);
+        }
+        console.log(lines);
+        // render()で描画
+        const root = document.getElementById("root");
+        ReactDOM.render(<div>{lines}</div>, root);
+      }
+    </script>
+  </body>
+</html>

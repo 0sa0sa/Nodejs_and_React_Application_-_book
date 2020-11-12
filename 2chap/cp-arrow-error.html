@@ -1,0 +1,55 @@
+<!-- ReactDOM.renderをする前にコンポーネントを宣言しておく必要があった -->
+<!-- アロー関数は return省略の時，{}ではなく，()で返すこと -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const App = (props) => {
+        const titles = props.titles.split(",");
+        console.log("titles=" + titles);
+        const bodys = props.bodys.split(",");
+        const bookObj = titles.map((title, i) => (
+          <Book title={titles[i]} body={bodys[i]} />
+        ));
+
+        return <div>{bookObj}</div>;
+      };
+
+      const Book = (props) => (
+        <div>
+          <TitleParts title={props.title} />
+          <BodyParts body={props.body} />
+        </div>
+      );
+
+      const TitleParts = (props) => (
+        <div style={{ backgroundColor: "red", color: "white" }}>
+          <h3>{props.title}</h3>
+        </div>
+      );
+      const BodyParts = (props) => (
+        <div style={{ border: "1px solid blue", margin: 15 }}>
+          <div>あらすじ：{props.body}</div>
+        </div>
+      );
+
+      const dom = (
+        <App
+          titles="三国志,民数記,西遊記"
+          bodys="昔の中国の話,昔のイスラエルの話,猿が活躍する話"
+        />
+      );
+      ReactDOM.render(dom, document.getElementById("root"));
+    </script>
+  </body>
+</html>

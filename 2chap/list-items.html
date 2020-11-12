@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const dom = <RList title="Colors" items="Red,Green,Blue,White" />;
+      ReactDOM.render(dom, document.getElementById("root"));
+
+      function RList(props) {
+        const items = props.items.split(",");
+        console.log("items:" + items);
+        const itemsObj = items.map((item) => <li>{item}</li>);
+        console.log("itemsObj:" + JSON.stringify(itemsObj));
+        return (
+          <div>
+            <h3>{props.title}</h3>
+            <ul>{itemsObj}</ul>
+          </div>
+        );
+      }
+    </script>
+  </body>
+</html>
